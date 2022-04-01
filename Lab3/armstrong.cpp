@@ -15,7 +15,7 @@ int main(void)
     {
         d = num % 10;
         sum += d * d * d;
-        num = num / 10;
+        num /= 10;
     }
 
     if (sum == n)
