@@ -6,6 +6,7 @@
 
 using namespace std;
 
+void selection_sort_ascending(int *array, int start_at_index, unsigned int number_of_elements_to_sort);
 float get_mean(int *array, unsigned int n);
 float get_median(int *array, unsigned int n);
 
@@ -30,6 +31,29 @@ int main(void)
     cout << median << " is median and mean is " << mean << "\n";
 }
 
+void selection_sort_ascending(int *array, int start_at_index, unsigned int number_of_elements_to_sort)
+{
+    int minElement = array[start_at_index], minIndex = start_at_index;
+
+    for (int i = start_at_index; i <= number_of_elements_to_sort - 2; i++)
+    {
+        minElement = array[i];
+        minIndex = i;
+
+        for (int j = i + 1; j <= number_of_elements_to_sort - 1; j++)
+        {
+            if (array[j] < minElement)
+            {
+                minElement = array[j];
+                minIndex = j;
+            }
+        }
+
+        array[minIndex] = array[i];
+        array[i] = minElement;
+    }
+}
+
 float get_mean(int *array, unsigned int n)
 {
     int sum_of_elements = 0;
@@ -46,14 +70,14 @@ float get_median(int *array, unsigned int n)
 {
     int newArray[n];
     copy(array, array + n, newArray);
-    sort(newArray, newArray + n);
+    selection_sort_ascending(newArray, 0, n);
 
     if (n % 2 == 1)
     {
-        return (float)array[((n + 1) / 2) - 1];
+        return (float)newArray[((n + 1) / 2) - 1];
     }
     else
     {
-        return (float)(array[(n / 2) - 1] + array[((n / 2) + 1)] - 1) / 2.0;
+        return (float)(newArray[(n / 2) - 1] + newArray[((n / 2) + 1)] - 1) / 2.0;
     }
 }
