@@ -2,13 +2,13 @@
 // For a given data, the mode need not be unique.
 
 #include <iostream>
-#include <bits/stdc++.h>
 
 using namespace std;
 
 void selection_sort_ascending(int *array, int start_at_index, unsigned int number_of_elements_to_sort);
 float get_mean(int *array, unsigned int n);
 float get_median(int *array, unsigned int n);
+void print_mode(int *array, unsigned int n);
 
 int main(void)
 {
@@ -80,4 +80,19 @@ float get_median(int *array, unsigned int n)
     {
         return (float)(newArray[(n / 2) - 1] + newArray[((n / 2) + 1)] - 1) / 2.0;
     }
+}
+
+void print_mode(int *array, unsigned int n)
+{
+    int maxElement = array[0];
+
+    for (int i = 0; i < n; i++)
+    {
+        if (array[i] > maxElement)
+        {
+            maxElement = array[i];
+        }
+    }
+
+    int count[maxElement + 1] = {};
 }
