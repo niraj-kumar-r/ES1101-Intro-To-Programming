@@ -2,6 +2,7 @@
 // For a given data, the mode need not be unique.
 
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -27,8 +28,9 @@ int main(void)
 
     float median = get_median(numArray, n);
     float mean = get_mean(numArray, n);
-
     cout << median << " is median and mean is " << mean << "\n";
+
+    print_mode(numArray, n);
 }
 
 void selection_sort_ascending(int *array, int start_at_index, unsigned int number_of_elements_to_sort)
@@ -84,15 +86,54 @@ float get_median(int *array, unsigned int n)
 
 void print_mode(int *array, unsigned int n)
 {
-    int maxElement = array[0];
+    int freqArray[n] = {};
+    int checkArray[n] = {};
 
     for (int i = 0; i < n; i++)
     {
-        if (array[i] > maxElement)
+        if (find(checkArray, checkArray + n, array[i]) == checkArray + n)
         {
-            maxElement = array[i];
+            int freq = 0;
+            for (int j = 0; j < n; j++)
+            {
+                if (array[j] == array[i])
+                {
+                    freq++;
+                }
+            }
+            freqArray[i] = freq;
+            checkArray[i] = array[i];
         }
     }
 
-    int count[maxElement + 1] = {};
+    int maxFreq = freqArray[0];
+    int num_of_modes = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (freqArray[i] > maxFreq)
+        {
+            maxFreq = freqArray[i];
+            num_of_modes = 1;
+        }
+        else if (freqArray[i] == maxFreq)
+        {
+            num_of_modes++;
+        }
+    }
+
+    int modeArray[num_of_modes] = {};
+    int j = 0;
+
+    cout << "The mode(s) is/are : ";
+
+    for (int i = 0; i < n; i++)
+    {
+        if (freqArray[i] == maxFreq)
+        {
+            modeArray[j] = array[i];
+            cout << " " << modeArray[j] << " ";
+            j++;
+        }
+    }
+    cout << "\n";
 }
