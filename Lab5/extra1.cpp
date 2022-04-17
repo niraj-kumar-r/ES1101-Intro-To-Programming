@@ -24,5 +24,12 @@ int main(void)
         }
     }
 
-    cout << n;
+    int A[n] = {};
+
+    cout << "Enter the elements (space seperated in a single line)\n";
+
+    for (int i = 0; i < n; i++)
+    {
+        cin >> A[i];
+    }
 }
