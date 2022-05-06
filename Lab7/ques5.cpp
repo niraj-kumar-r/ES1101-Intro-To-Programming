@@ -5,17 +5,17 @@
 #include <algorithm>
 using namespace std;
 
-bool isPrime(int num, int div = 2);
+bool isSorted(int A[], int low, int high);
 
 int main()
 {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */
-    int t;
+    int t = 1;
     cin >> t;
 
     while (t--)
     {
-        int n;
+        int n = 1;
         cin >> n;
 
         int arr[n];
@@ -25,26 +25,28 @@ int main()
             cin >> arr[i];
         }
 
-        int count = 0;
-
-        for (int i = 0; i < n; i++)
+        if (isSorted(arr, 0, n - 1))
         {
-            if (isPrime(arr[i]))
-            {
-                count++;
-            }
+            cout << 1 << '\n';
         }
-
-        cout << count << '\n';
+        else
+        {
+            cout << 0 << '\n';
+        }
     }
     return 0;
 }
 
-bool isPrime(int num, int div)
+bool isSorted(int A[], int low, int high)
 {
-    if (num <= 2)
+    if (low == high)
     {
-        if (num == 2)
+        return true;
+    }
+
+    else
+    {
+        if (isSorted(A, low, high - 1) == 1 && A[high - 1] <= A[high])
         {
             return true;
         }
@@ -52,20 +54,5 @@ bool isPrime(int num, int div)
         {
             return false;
         }
-    }
-
-    else if (num % div == 0)
-    {
-        return false;
-    }
-
-    else if (div > sqrt(num))
-    {
-        return true;
-    }
-
-    else
-    {
-        return isPrime(num, div + 1);
     }
 }
