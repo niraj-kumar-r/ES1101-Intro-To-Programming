@@ -25,15 +25,12 @@ int compStringRecursive(char x[], char y[], int i)
     {
         return 1;
     }
+    else if (x[i] == '\0' && y[i] == '\0')
+    {
+        return 0;
+    }
     else
     {
-        if (x[i] == '\0' && y[i] == '\0')
-        {
-            return 0;
-        }
-        else
-        {
-            return compStringRecursive(x, y, i + 1);
-        }
+        return compStringRecursive(x, y, i + 1);
     }
 }
