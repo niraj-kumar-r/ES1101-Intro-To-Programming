@@ -28,15 +28,38 @@ int main()
             return 1;
         }
 
+        int *counter = A;
+
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                cin >> *(counter++);
+            }
+        }
+
+        counter = B;
+
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                cin >> *(counter++);
+            }
+        }
+
         add2Matrices(A, B, C, m, n);
 
-        for (int i = 1; i <= m * n; i++)
+        counter = C;
+
+        for (int i = 0; i < m; i++)
         {
-            cout << *(C + i - 1) << ' ';
-            if (i % 3 == 0)
+            for (int j = 0; j < n; j++)
             {
-                cout << '\n';
+                cout << *(counter++) << ' ';
             }
+
+            cout << '\n';
         }
 
         free(A);
@@ -49,8 +72,14 @@ int main()
 
 void add2Matrices(int *A, int *B, int *C, int m, int n)
 {
-    for (int i = 1; i <= m * n; i++)
+    for (int i = 0; i < m; i++)
     {
-        *(C + i - 1) = *(A + i - 1) + *(B + i - 1);
+        for (int j = 0; j < n; j++)
+        {
+            *C = *A + *B;
+            A++;
+            B++;
+            C++;
+        }
     }
 }
