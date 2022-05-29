@@ -4,5 +4,6 @@
         "iosfwd": "cpp",
         "ostream": "cpp",
         "array": "cpp"
-    }
+    },
+    "python.formatting.provider": "black"
 }
