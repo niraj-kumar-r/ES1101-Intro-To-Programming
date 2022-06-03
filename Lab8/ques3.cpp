@@ -5,6 +5,8 @@
 #include <algorithm>
 using namespace std;
 
+int checkMagicSq(int magicSq[][100], int n);
+
 int main()
 {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */
@@ -16,7 +18,7 @@ int main()
         int n = 1;
         cin >> n;
 
-        int magicSq[n][n];
+        int magicSq[n][100];
 
         for (int i = 0; i < n; i++)
         {
@@ -26,53 +28,59 @@ int main()
             }
         }
 
-        int sumVal = 0;
-
-        for (int k = 0; k < n; k++)
-        {
-            sumVal += magicSq[0][k];
-        }
-
-        int sumArr[(2 * n) + 2] = {};
-        int sumArrIndex = 0;
-
-        int dia1 = 0, dia2 = 0;
-
-        for (int i = 0; i < n; i++)
-        {
-            int col = 0;
-            int row = 0;
-
-            for (int j = 0; j < n; j++)
-            {
-                row += magicSq[i][j];
-                col += magicSq[j][i];
-            }
-
-            sumArr[sumArrIndex] = col;
-            sumArr[sumArrIndex + 1] = row;
-            sumArrIndex += 2;
-
-            dia1 += magicSq[i][i];
-            dia2 += magicSq[i][n - i - 1];
-        }
-        sumArr[sumArrIndex] = dia1;
-        sumArr[sumArrIndex + 1] = dia2;
-
-        sumArrIndex += 2;
-
-        int result = 1;
-
-        for (int i = 0; i < (2 * n) + 2; i++)
-        {
-            if (sumArr[i] != sumVal)
-            {
-                result = 0;
-                break;
-            }
-        }
+        int result = checkMagicSq(magicSq, n);
 
         cout << result << '\n';
     }
     return 0;
+}
+
+int checkMagicSq(int magicSq[][100], int n)
+{
+    int sumVal = 0;
+
+    for (int k = 0; k < n; k++)
+    {
+        sumVal += magicSq[0][k];
+    }
+
+    int sumArr[(2 * n) + 2] = {};
+    int sumArrIndex = 0;
+
+    int dia1 = 0, dia2 = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        int col = 0;
+        int row = 0;
+
+        for (int j = 0; j < n; j++)
+        {
+            row += magicSq[i][j];
+            col += magicSq[j][i];
+        }
+
+        sumArr[sumArrIndex] = col;
+        sumArr[sumArrIndex + 1] = row;
+        sumArrIndex += 2;
+
+        dia1 += magicSq[i][i];
+        dia2 += magicSq[i][n - i - 1];
+    }
+    sumArr[sumArrIndex] = dia1;
+    sumArr[sumArrIndex + 1] = dia2;
+
+    sumArrIndex += 2;
+
+    int result = 1;
+
+    for (int i = 0; i < (2 * n) + 2; i++)
+    {
+        if (sumArr[i] != sumVal)
+        {
+            result = 0;
+            break;
+        }
+    }
+    return result;
 }
