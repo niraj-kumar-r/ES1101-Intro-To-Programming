@@ -13,23 +13,23 @@ void display(node *p);
 
 int main(void)
 {
-    node *first, *head, *a;
+    node *head, *b, *a;
 
     int x = 0;
     cin >> x;
 
-    first = head = createNode(x);
+    head = b = createNode(x);
 
     cin >> x;
     while (x != -1)
     {
         a = createNode(x);
-        head->next = a;
-        head = head->next;
+        b->next = a;
+        b = b->next;
         cin >> x;
     }
 
-    display(first);
+    display(head);
 
     return 0;
 }
